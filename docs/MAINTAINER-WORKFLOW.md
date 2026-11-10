@@ -4,6 +4,12 @@
 
 Repository administrators coordinate issue triage, review, merges, and releases using GitHub. Contributors do not need access to any private deployment or a cloud account to run guest mode. The project is early-stage; response times and release dates are not guaranteed.
 
+## Production source
+
+The maintainer's Vercel project deploys from `main` in `devoralabsapp/piano-sprout`. Before pushing from a maintainer checkout, use `git remote -v` and `git status -sb` to verify the destination and branch. Check the deployment's source commit and the live site after a production push.
+
+Keep Firebase configuration, iOS signing overrides, and user exports in ignored local files. Configure the web deployment's Firebase variables in Vercel. Use your own Firebase project for forks and previews you operate independently.
+
 ## From report to change
 
 1. Reproduce a report with synthetic data and record browser/device versions.
