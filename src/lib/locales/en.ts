@@ -69,6 +69,8 @@ export const english: Record<string, string> = {
   "Không khôi phục được đăng nhập. Hãy đăng nhập lại.":
     "Unable to restore your account. Please sign in again.",
   "Không đăng nhập được.": "Unable to sign in.",
+  "Bản cài đặt này chưa được cấu hình đăng nhập Google. Vui lòng cập nhật ứng dụng.":
+    "Google sign-in is not configured in this installation. Please update the app.",
   "Không kết nối được MIDI.": "Unable to connect to MIDI.",
   "Không xuất được tiến độ. Hãy thử lại.":
     "Unable to export your progress. Please try again.",

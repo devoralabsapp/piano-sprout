@@ -10,7 +10,7 @@
     "test": "vitest run",
     "test:e2e": "playwright test",
     "ios:sync": "npm run build && node scripts/prepare-firebase-ios.mjs && cap sync ios",
-    "ios:open": "cap open ios",
+    "ios:open": "node scripts/prepare-firebase-ios.mjs && cap open ios",
     "test:auth": "playwright test --config playwright.auth.config.ts",
     "test:firebase": "npx -y firebase-tools@latest emulators:exec --project demo-piano-sprout --config firebase.emulators.json --only auth,firestore \"node --test tests/firebase/*.test.mjs && npm run test:auth\""
   },

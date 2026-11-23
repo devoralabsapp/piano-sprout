@@ -22,6 +22,8 @@ Register an iOS app using **your bundle ID**, then download its own `GoogleServi
 
 The Firebase plugin is configured with only the `Google` Swift Package trait, not Facebook. Keep generated SPM symlinks out of Git. The tracked Xcode project includes the plist resource and `-ObjC`. Simulator compilation does not verify physical-device Google sign-in, sound, microphone, or MIDI.
 
+After pulling code or replacing the native plist, run `npm run ios:sync` before building in Xcode. `npm run ios:open` also prepares the callback scheme. A direct Xcode build can otherwise retain the sample scheme from Git while bundling a real Google client, which causes the Google SDK to terminate the app. The iOS sign-in flow now validates the installed bundle's client, project, bundle ID and callback scheme before opening Google and reports a configuration error when they disagree. Keep the generated client scheme and local signing changes out of public commits.
+
 ## Local verification
 
 ```sh

@@ -1,4 +1,4 @@
-import { Capacitor } from "@capacitor/core";
+import { Capacitor, registerPlugin } from "@capacitor/core";
 import {
   GoogleAuthProvider,
   onAuthStateChanged,
@@ -10,6 +10,9 @@ import {
 import { auth } from "./firebase";
 export { configured } from "./firebase";
 export type AuthUser = Pick<User, "uid" | "displayName" | "email">;
+const nativeAuthConfiguration = registerPlugin<{
+  validate(options: { projectId: string | undefined }): Promise<void>;
+}>("PianoAuthConfiguration");
 export function observeAuth(
   next: (user: AuthUser | null) => void,
   error: () => void,
@@ -26,6 +29,17 @@ export async function signInGoogle() {
       "Đăng nhập chưa được cấu hình. Bạn vẫn có thể luyện ở chế độ khách.",
     );
   if (Capacitor.isNativePlatform()) {
+    if (Capacitor.getPlatform() === "ios") {
+      try {
+        await nativeAuthConfiguration.validate({
+          projectId: auth.app.options.projectId,
+        });
+      } catch {
+        throw new Error(
+          "Bản cài đặt này chưa được cấu hình đăng nhập Google. Vui lòng cập nhật ứng dụng.",
+        );
+      }
+    }
     const { FirebaseAuthentication } =
       await import("@capacitor-firebase/authentication");
     const result = await FirebaseAuthentication.signInWithGoogle({
